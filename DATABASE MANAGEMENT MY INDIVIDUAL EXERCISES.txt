@@ -471,3 +471,42 @@ mysql> select *from students where Last_Name in ('peter','ange','jmv');
 3 rows in set (0.00 sec)
 
 mysql>
+
+
+mysql> alter table students add Telephone varchar(20) unique;
+Query OK, 6 rows affected (0.04 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select *from students;
++------------+------------+-----------+-------+----------+-----------+
+| Reg_Number | First_Name | Last_Name | Marks | Decision | Telephone |
++------------+------------+-----------+-------+----------+-----------+
+|       1233 | MUHIRWA    | Peter     | 89.5  | Pass     | NULL      |
+|       6754 | KAMIKAZI   | Annetty   | 67.4  | Pass     | NULL      |
+|       2312 | HIRWA      | Jackson   | 86    | NULL     | NULL      |
+|       5654 | TUYIZERE   | Jojn      | 67    | NULL     | NULL      |
+|       2447 | MUKUNDWA   | Ange      | 8.3   | Fail     | NULL      |
+|       2311 | MUHIRWA    | Jmv       | 57    | NULL     | NULL      |
++------------+------------+-----------+-------+----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> update students set telephone='0780505948' where Reg_Number=1233;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from students;
++------------+------------+-----------+-------+----------+------------+
+| Reg_Number | First_Name | Last_Name | Marks | Decision | Telephone  |
++------------+------------+-----------+-------+----------+------------+
+|       1233 | MUHIRWA    | Peter     | 89.5  | Pass     | 0780505948 |
+|       6754 | KAMIKAZI   | Annetty   | 67.4  | Pass     | NULL       |
+|       2312 | HIRWA      | Jackson   | 86    | NULL     | NULL       |
+|       5654 | TUYIZERE   | Jojn      | 67    | NULL     | NULL       |
+|       2447 | MUKUNDWA   | Ange      | 8.3   | Fail     | NULL       |
+|       2311 | MUHIRWA    | Jmv       | 57    | NULL     | NULL       |
++------------+------------+-----------+-------+----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> update students set telephone='0780505948' where Reg_Number=6754;
+ERROR 1062 (23000): Duplicate entry '0780505948' for key 'students.Telephone'
+mysql>
